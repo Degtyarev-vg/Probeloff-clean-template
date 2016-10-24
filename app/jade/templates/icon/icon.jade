@@ -1,0 +1,7 @@
+mixin icon(iconName, isBlock)
+	if isBlock
+		svg&attributes(attributes)
+			use(xlink:href='img/svg-sprite.svg##{iconName}')
+	else
+		+e('svg')&attributes(attributes)
+			use(xlink:href='img/svg-sprite.svg##{iconName}')

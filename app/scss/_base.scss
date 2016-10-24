@@ -1,0 +1,18 @@
+@import "bourbon";
+@import "vars";
+
+body{
+	font-size: 10px;
+	min-width: 320px;
+	position: relative;
+	line-height: 1.6;
+	font-family: $default-font;
+	overflow-x: hidden;
+}
+
+.icon {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	fill: currentColor;
+}

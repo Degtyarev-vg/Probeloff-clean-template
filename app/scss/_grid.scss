@@ -1,0 +1,109 @@
+.clearfix:before,
+.clearfix:after,
+.grid:before,
+.grid:after,
+.grid_fluid:before,
+.grid_fluid:after,
+.grid__col:before,
+.grid__col:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after,
+.grid:after,
+.grid_fluid:after,
+.grid__col:after {
+  clear: both;
+}
+
+$items: 12;
+$width: 1170px;
+$paddind: 0px;
+
+.grid {
+	max-width: $width;
+  margin-right: auto;
+  margin-left: auto;
+  &_fluid{
+  	max-width: 100%;
+  }
+}
+
+$breakpoints: (
+  xs: 0px,
+  sm: 480px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+$grid-width: (
+  //md: 750px,
+  //lg: 970px,
+  //xl: 1170px
+);
+
+@mixin break($size) {  
+  @media (min-width: map-get($breakpoints, $size)) {
+    @content;
+  }
+}
+
+@each $key, $value in $breakpoints {
+	@each $point, $width in $grid-width{
+	  @for $i from 1 through 1 {
+	    .grid{
+	      @include break($point) {
+	        max-width: $width
+	      }
+	    }
+	  }
+	}
+}
+
+@each $key, $value in $breakpoints {
+  @for $i from 1 through $items {
+    .grid__col_#{$key}_#{$i} {
+      @include break($key) {
+        width: #{$i / $items * 100%};
+        float: left;
+        position: relative;
+        min-height: 1px;
+        padding-left: $paddind;
+        padding-right: $paddind;
+      }
+    }
+    .grid__col_pull-#{$key}_#{$i} {
+      @include break($key) {
+        right: #{$i / $items * 100%};
+      }
+    }
+    .grid__col_push-#{$key}_#{$i} {
+      @include break($key) {
+        left: #{$i / $items * 100%};
+      }
+    }
+    .grid__col_offset-#{$key}_#{$i} {
+      @include break($key) {
+        margin-left: #{$i / $items * 100%};
+      }
+    }
+  }
+  @for $i from 0 through 0 {
+    .grid__col_pull-#{$key}_#{$i} {
+      @include break($key) {
+        right: auto;
+      }
+    }
+    .grid__col_push-#{$key}_#{$i} {
+      @include break($key) {
+        left: auto;
+      }
+    }
+    .grid__col_offset-#{$key}_#{$i} {
+      @include break($key) {
+        margin-left: 0%;
+      }
+    }
+  }
+}

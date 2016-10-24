@@ -1,0 +1,13 @@
+include ../../blocks.project/includes
+include page/page
+include scripts/scripts
+include icon/icon
+
+doctype html
+html(lang='ru')
+	include head/head
+	+page
+		block content
+		+scripts(['libs.min.js'])
+		+scripts(['common.js'])
+		+scripts(['blocks.min.js'])
