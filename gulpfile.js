@@ -17,8 +17,9 @@ var gulp 						= require('gulp'),
 		cache 					= require('gulp-cache'),
 		pngquant 				= require('imagemin-pngquant'),
 		browserSync 		= require('browser-sync').create(),
-		concat 					= require('gulp-concat'),
+		//concat 					= require('gulp-concat'),
 		uglify 					= require('gulp-uglify'),
+		include       	= require('gulp-include'),
 		jade 						= require('gulp-jade'),
 		spritesmith 		= require('gulp.spritesmith'),
 		svgmin 					= require('gulp-svgmin'),
@@ -72,27 +73,19 @@ gulp.task('scss', function () {
 		.pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('libs', function() {
-	return gulp.src([
-		'app/libs/jquery/dist/jquery.min.js',
-		'app/libs/modernizr/modernizr.js',
-		'app/libs/html5shiv/es5-shim.min.js',
-		'app/libs/html5shiv/html5shiv.min.js',
-		'app/libs/html5shiv/html5shiv-printshiv.min.js',
-		'app/libs/magnific-popup/magnific-popup.min.js',
-		'app/libs/owl/owl.carousel.min.js',
-		'app/libs/waypoints/jquery.waypoints.min.js',
-		'app/libs/svg4everybody/svg4everybody.js'
-		])
-		.pipe(concat('libs.min.js'))
-		.pipe(uglify())
-		.pipe(gulp.dest('app/js'));
+gulp.task("libs:js", function() {
+  return gulp.src(['app/libs/include-libs.js'])
+    .pipe( include() )
+    .pipe(rename('libs.min.js'))
+    .pipe(uglify())
+    .pipe( gulp.dest("app/js") )
 });
 
-gulp.task('blocks-js', function() {
-	return gulp.src('app/blocks*/**/*.js')
-		.pipe(concat('blocks.min.js'))
-		.pipe(uglify())
+gulp.task('blocks:js', function() {
+	return gulp.src('app/blocks.project/includes.js')
+		.pipe( include() )
+    .pipe(rename('blocks.min.js'))
+    .pipe(uglify())
 		.pipe(gulp.dest('app/js'));
 });
 
@@ -130,7 +123,8 @@ gulp.task('svg-sprite', function () {
 gulp.task('watch', function() {
 	gulp.watch('app/**/*.jade', gulp.series('jade'));
 	gulp.watch(['app/scss/**/*.scss', 'app/blocks*/**/*.scss'], gulp.series('scss'));
-	gulp.watch('app/blocks*/**/*.js', gulp.series('blocks-js'));
+	gulp.watch('app/libs/include-libs.js', gulp.series('libs:js'));
+	gulp.watch('app/blocks*/**/*.js', gulp.series('blocks:js'));
 	gulp.watch('app/img/icons/png/*.png', gulp.series('png-sprite'));
 	gulp.watch('app/img/icons/svg/*.svg', gulp.series('svg-sprite'));
 });
