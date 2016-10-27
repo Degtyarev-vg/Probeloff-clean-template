@@ -1,7 +1,14 @@
-extends templates/index
+include ../blocks.project/includes
+include templates/page/page
+include templates/scripts/scripts
 
-block head
-	- var pageTitle = 'There is title';
+doctype html
+html(lang='ru')
+	include templates/head/head
+		block head
+			- var pageTitle = 'There is title';
 
-block content
-	//Тут пишем контент
+	+page
+		//Тут пишем контент
+
+		+scripts(['libs.min.js', 'common.js', 'blocks.min.js'])
