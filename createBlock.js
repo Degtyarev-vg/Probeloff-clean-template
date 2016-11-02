@@ -10,6 +10,7 @@ const dirs = pjson.config.directories;   // отдельно имеем объе
 const mkdirp = require('mkdirp');        // зависимость
 
 var mainFile = 'style.scss';             // файл подключения
+var writeBlock = 'blocks.project';               // директория для записи
 
 let blockName = process.argv[2];          // получим имя блока
 let defaultExtensions = ['jade', 'scss']; // расширения по умолчанию
@@ -18,7 +19,7 @@ let extensions = uniqueArray(defaultExtensions.concat(process.argv.slice(3)));  
 // Если есть имя блока
 if(blockName) {
 
-  let dirPath = dirs.source + '/blocks/' + blockName + '/'; // полный путь к создаваемой папке блока
+  let dirPath = dirs.source + '/'+ writeBlock +'/' + blockName + '/'; // полный путь к создаваемой папке блока
   mkdirp(dirPath, function(err){                            // создаем
 
     // Если какая-то ошибка — покажем
@@ -49,7 +50,7 @@ if(blockName) {
 
         // Если это SCSS
         if(extention == 'scss') {
-          SASSfileImport = '@import \'' + dirs.source + '/blocks/' + blockName + '/' + blockName + '.scss\';';
+          SASSfileImport = '@import \'' + dirs.source + '/'+ writeBlock +'/' + blockName + '/' + blockName + '.scss\';';
           fileContent = '// Для импорта в файл подключения: ' + SASSfileImport + '\n\n@import \'../../scss/vars.scss\';     // файл с переменными\n@import \'../../scss/png-sprite\';    // файл с png-спрайтами\n@import \'bourbon\';\n\n\n.' + blockName + ' {\n  \n}\n';
           fileCreateMsg = '[NTH] Для импорта стилей: ' + SASSfileImport;
 
@@ -94,7 +95,7 @@ if(blockName) {
         // Если это jade
         else if(extention == 'jade') {
           fileContent = 'mixin ' + blockName + '()\n\t+b.' + blockName + '&attributes(attributes)\n\t\tblock\n';
-          fileCreateMsg = '[NTH] Для вставки разметки: @@include(\'blocks/' + blockName + '/' + blockName + '.jade\')  Подробнее: https://www.npmjs.com/package/gulp-file-include';
+          fileCreateMsg = '[NTH] Для вставки разметки: @@include(\''+ writeBlock +'/' + blockName + '/' + blockName + '.jade\')  Подробнее: https://www.npmjs.com/package/gulp-file-include';
         }
 
         // Если это JS
