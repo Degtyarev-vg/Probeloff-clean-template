@@ -10,7 +10,7 @@ const dirs = pjson.config.directories;   // отдельно имеем объе
 const mkdirp = require('mkdirp');        // зависимость
 
 var mainFile = 'style.scss';             // файл подключения
-var writeBlock = 'blocks.project';               // директория для записи
+var writeBlock = 'blocks';               // директория для записи
 
 let blockName = process.argv[2];          // получим имя блока
 let defaultExtensions = ['jade', 'scss']; // расширения по умолчанию

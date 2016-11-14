@@ -7,3 +7,4 @@
 //= include owl/owl.carousel.min.js
 //= include waypoints/jquery.waypoints.min.js
 //= include svg4everybody/svg4everybody.js
+//= include jquery.validate/jquery.validate.min.js
