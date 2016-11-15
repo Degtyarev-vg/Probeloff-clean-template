@@ -7,7 +7,7 @@ $c = true;
 if ( $method === 'POST' ) {
 
 	$project_name = trim($_POST["project_name"]);
-	$admin_email  = "degtyarev.vg@mail.ru";
+	$admin_email  = "test@mail.ru";
 	$form_subject = trim($_POST["form_subject"]);
 
 	foreach ( $_POST as $key => $value ) {

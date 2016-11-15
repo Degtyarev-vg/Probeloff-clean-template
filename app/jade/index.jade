@@ -9,20 +9,7 @@ html(lang='ru')
 			- var pageTitle = 'There is title';
 
 	+page
-		//НАЧАЛО ФОРМЫ
-		+form-validation('Тестовый проект', 'Тестовая форма')
-			+e.group
-				+b('input')(type='text' name='Электронная_почта' placeholder='Ваш email').input.validation._email
-			+e.group
-				+b('input')(type='text' name='Имя' placeholder='Вашe имя').input.validation._rangelength
-			+e.group
-				+b('input')(type='text' name='Телефон' placeholder='Ваш телефон').input
-			+e.group
-				+b('textarea')(name='Сообщение' placeholder='Ваше сообщение').textarea
-			+b('button')(type='submit') Отправить
-		//КОНЕЦ ФОРМЫ
-
-		+answer-form
+		//Тут пишем контент
 
 		link(href='css/fonts.min.css' rel='stylesheet')
 		link(href='css/style.min.css' rel='stylesheet')

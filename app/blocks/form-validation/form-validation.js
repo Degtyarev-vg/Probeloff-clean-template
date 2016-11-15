@@ -13,10 +13,8 @@ $(document).ready(function() {
 	    },
 	    errorElement: "span",
 	    errorClass: "form-validation__error-text",
-	    //validClass: "success",
 	    ignore: ".validation_ignore",
-	    //focusCleanup: true,
-	    focusInvalid: false,
+	    focusInvalid: true,
 	    /*errorPlacement: function(error, element){
 	    	return true;
 	    },*/

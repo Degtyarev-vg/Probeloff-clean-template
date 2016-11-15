@@ -4,12 +4,6 @@ $(document).ready(function() {
 		return this.optional( element ) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test( value );
 	}, 'Некорректный email');
 
-	/*$.validator.methods.email = function( value, element ) {
-	  return this.optional( element ) || /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test( value );
-	}
-	* Переопределяем проверку email, не меняя сообщений по умолчанию
-	*/
-
 	$.validator.addMethod("validationRequired", $.validator.methods.required, "Обязательное поле!");
 	$.validator.addMethod("validationMinlength", $.validator.methods.minlength, "Минимум {0} символов!");
 	$.validator.addMethod("validationMaxlength", $.validator.methods.maxlength, "Максимум {0} символов!");
