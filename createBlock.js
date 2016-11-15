@@ -9,7 +9,7 @@ const pjson = require('./package.json'); // получим настройки и
 const dirs = pjson.config.directories;   // отдельно имеем объект с директориями (где лежаи папка с блоками)
 const mkdirp = require('mkdirp');        // зависимость
 
-var mainFile = 'style.scss';             // файл подключения
+var mainFile = 'includes.scss';          // файл подключения
 var writeBlock = 'blocks';               // директория для записи
 
 let blockName = process.argv[2];          // получим имя блока
@@ -32,7 +32,7 @@ if(blockName) {
       console.log('[NTH] Создание папки ' + dirPath + ' (создана, если ещё не существует)');
 
       // Читаем файл подключения
-      let connectManager = fs.readFileSync(dirs.source + '/scss/' + mainFile, 'utf8');
+      let connectManager = fs.readFileSync(dirs.source + '/'+ writeBlock +'/' + mainFile, 'utf8');
 
       // Делаем из строк массив, фильтруем массив, оставляя только строки с незакомментированными импортами
       let fileSystem = connectManager.split('\n').filter(function(item) {
@@ -71,24 +71,24 @@ if(blockName) {
           // Если флаг наличия импорта по-прежнему опущен, допишем импорт
           if(!impotrtExist) {
             // Открываем файл
-            fs.open(dirs.source + '/scss/' + mainFile, 'a', function(err, fileHandle) {
+            fs.open(dirs.source + '/'+ writeBlock +'/' + mainFile, 'a', function(err, fileHandle) {
               // Если ошибок открытия нет...
               if (!err) {
                 // Запишем в конец файла
                 fs.write(fileHandle, SASSfileImport + '\n', null, 'utf8', function(err, written) {
                   if (!err) {
-                    console.log('[NTH] В файл подключений ('+ dirs.source + '/scss/' + mainFile + ') записано: ' + SASSfileImport);
+                    console.log('[NTH] В файл подключений ('+ dirs.source + '/'+ writeBlock +'/' + mainFile + ') записано: ' + SASSfileImport);
                   } else {
-                    console.log('[NTH] ОШИБКА записи в '+ dirs.source + '/scss/' + mainFile + ': ' + err);
+                    console.log('[NTH] ОШИБКА записи в '+ dirs.source + '/'+ writeBlock +'/' + mainFile + ': ' + err);
                   }
                 });
               } else {
-                console.log('[NTH] ОШИБКА открытия '+ dirs.source + '/scss/' + mainFile + ': ' + err);
+                console.log('[NTH] ОШИБКА открытия '+ dirs.source + '/'+ writeBlock +'/' + mainFile + ': ' + err);
               }
             });
           }
           else {
-            console.log('[NTH] Импорт НЕ прописан в '+ dirs.source + '/scss/' + mainFile + ' (он там уже есть)');
+            console.log('[NTH] Импорт НЕ прописан в '+ dirs.source + '/'+ writeBlock +'/' + mainFile + ' (он там уже есть)');
           }
         }
 

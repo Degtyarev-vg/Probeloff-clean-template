@@ -2,11 +2,4 @@
 @import "base";
 @import "../libs/include-libs";
 @import "grid";
-
-@import './app/blocks/form-validation/form-validation.scss';
-@import './app/blocks/validation/validation.scss';
-@import './app/blocks/input/input.scss';
-@import './app/blocks/textarea/textarea.scss';
-@import './app/blocks/answer-form/answer-form.scss';
-@import './app/blocks/magnific-popup/magnific-popup.scss';
-@import './app/blocks/hidden/hidden.scss';
+@import '../blocks.project/includes';

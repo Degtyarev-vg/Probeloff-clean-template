@@ -72,7 +72,7 @@ mixin new-block()
 ```
 для scss:
 ```
-// Для импорта в файл подключения: @import './app/blocks/new-block/new-block.scss';
+// Для импорта в файл подключения: @import './app/blocks*/new-block/new-block.scss';
 
 @import '../../scss/vars.scss';     // файл с переменными
 @import '../../scss/png-sprite';    // файл с png-спрайтами
@@ -98,12 +98,14 @@ $(document).ready(function() {
 block/                              # Библиотека блоков для всех проектов
     bemto/                          # Библиотека миксинов для удобного именования БЭМ терминами
     .../                            # Реализация блоков в технологии jade, scss [другие расширения]
-    includes.jade                   # Файл подключения всех scss файлов с уровня block/
+    includes.jade                   # Файл подключения всех jade файлов с уровня block/
     includes.js                     # Файл подключения всех js файлов с уровня block/
+    includes.scss                   # Файл подключения всех scss файлов с уровня block/
 blocks.project/                     # Библиотека блоков уровня проекта
     .../                            # Реализация блоков в технологии jade, scss [другие расширения]
     includes.jade                   # Файл подключения всех scss файлов с уровня blocks.project/ а также импорт блоков уровня block/
     includes.js                     # Файл подключения всех js файлов с уровня blocks.project/ а также импорт блоков уровня block/
+    includes.scss                   # Файл подключения всех scss файлов с уровня blocks.project/ а также импорт блоков уровня block/
 css/                                # css стили
     fonts.min.css                   # css стили используемых шрифтов
     style.min.css                   # Результат конкатенации реализации всех блоков в технологии css
