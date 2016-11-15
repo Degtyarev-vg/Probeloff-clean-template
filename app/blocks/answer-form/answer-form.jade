@@ -1,0 +1,7 @@
+mixin answer-form()
+	+b.answer-form.zoom-anim-dialog.mfp-hide#answer-form&attributes(attributes)
+		+e('p').header Ваша заявка принята
+		+e('p').subheader Мы свяжемся с вами в ближайшее время
+		+e('a')(href='#').ok Ок
+
+	+b('a')(href='#answer-form').popup-with-move-anim.answer-form-show.hidden

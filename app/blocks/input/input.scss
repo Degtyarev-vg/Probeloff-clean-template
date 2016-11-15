@@ -1,0 +1,35 @@
+// Для импорта в файл подключения: @import './app/blocks/input/input.scss';
+
+@import '../../scss/vars.scss';     // файл с переменными
+@import '../../scss/png-sprite';    // файл с png-спрайтами
+@import 'bourbon';
+
+
+.input {
+	font-family: $default-font;
+	font-size: 14px;
+  color: #555;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  margin-bottom: 20px;
+  padding: 6px 35px 6px 12px;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  &:focus{
+  	border-color: #66afe9;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  }
+  &::-webkit-input-placeholder       {opacity: 1; transition: opacity 0.3s ease;}
+	&::-moz-placeholder                {opacity: 1; transition: opacity 0.3s ease;}
+	&:-moz-placeholder                 {opacity: 1; transition: opacity 0.3s ease;}
+	&:-ms-input-placeholder            {opacity: 1; transition: opacity 0.3s ease;}
+	&:focus::-webkit-input-placeholder {opacity: .4; transition: opacity 0.3s ease;}
+	&:focus::-moz-placeholder          {opacity: .4; transition: opacity 0.3s ease;}
+	&:focus:-moz-placeholder           {opacity: .4; transition: opacity 0.3s ease;}
+	&:focus:-ms-input-placeholder      {opacity: .4; transition: opacity 0.3s ease;}
+}

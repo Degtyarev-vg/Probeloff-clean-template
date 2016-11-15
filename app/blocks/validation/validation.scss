@@ -1,0 +1,21 @@
+// Для импорта в файл подключения: @import './app/blocks/validation/validation.scss';
+
+@import '../../scss/vars.scss';     // файл с переменными
+@import '../../scss/png-sprite';    // файл с png-спрайтами
+@import 'bourbon';
+
+
+.validation {
+  
+	&_valid{
+		border: 1px solid green !important;
+	}
+
+	&_invalid{
+		border: 1px solid #d4244d !important;
+	}
+	&_invalid:focus{
+		box-shadow: none !important;
+	}
+
+}

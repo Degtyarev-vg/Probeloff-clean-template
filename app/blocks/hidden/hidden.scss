@@ -1,0 +1,10 @@
+// Для импорта в файл подключения: @import './app/blocks/hidden/hidden.scss';
+
+@import '../../scss/vars.scss';     // файл с переменными
+@import '../../scss/png-sprite';    // файл с png-спрайтами
+@import 'bourbon';
+
+
+.hidden {
+  display: none;
+}
