@@ -1,6 +1,7 @@
 'use strict';
 
 var gulp 						= require('gulp'),
+		fs 							= require('fs'),
 		sass 						= require('gulp-sass'),
 		bourbon 				= require('node-bourbon'),
 		notify 					= require("gulp-notify"),
@@ -24,7 +25,8 @@ var gulp 						= require('gulp'),
 		svgmin 					= require('gulp-svgmin'),
 		svgstore 				= require('gulp-svgstore'),
 		cheerio 				= require('gulp-cheerio'),
-		replace 				= require('gulp-replace');
+		replace 				= require('gulp-replace'),
+		merge 					= require('gulp-merge-json');
 
 const pjson = require('./package.json');
 const dirs = pjson.config.directories;
@@ -38,12 +40,22 @@ gulp.task('browser-sync', function() {
 	browserSync.watch('app/**/*.js').on('change', browserSync.reload);
 });
 
+gulp.task('json', function () {
+	return gulp.src(['app/blocks*/**/*.json', '!app/**/_*.json'])
+		.pipe(plumber({
+			errorHandler: notify.onError()
+		}))
+		.pipe(merge('data.json'))
+		.pipe(gulp.dest('app/'));
+});
+
 gulp.task('jade', function() {
   return gulp.src('app/jade/*.jade')
   	.pipe(plumber({
 			errorHandler: notify.onError()
 		}))
     .pipe(jade({
+    	locals: JSON.parse(fs.readFileSync('./app/data.json', 'utf-8')),
     	pretty: true
     }))
     .pipe(gulp.dest('app/'))
@@ -126,6 +138,7 @@ gulp.task('watch', function() {
 	gulp.watch('app/blocks*/**/*.js', gulp.series('blocks:js'));
 	gulp.watch('app/img/icons/png/*.png', gulp.series('png-sprite'));
 	gulp.watch('app/img/icons/svg/*.svg', gulp.series('svg-sprite'));
+	gulp.watch('app/blocks*/**/*.json', gulp.series('json'));
 });
 
 gulp.task('clearcache', function (done) {

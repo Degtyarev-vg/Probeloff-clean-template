@@ -1,3 +1,7 @@
 mixin page()
 	+b('body').page&attributes(attributes)
 		block
+
+		link(href='css/fonts.min.css' rel='stylesheet')
+		link(href='css/style.min.css' rel='stylesheet')
+		+scripts(['libs.min.js', 'common.js', 'blocks.min.js'])
