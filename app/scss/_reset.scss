@@ -29,6 +29,12 @@ img,fieldset, a img{
 	border: none;
 }
 
+img{
+	max-width: 100%;
+	width: auto;
+	height: auto;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="tel"],

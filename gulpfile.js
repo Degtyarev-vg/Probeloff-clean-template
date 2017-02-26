@@ -26,7 +26,9 @@ var gulp 						= require('gulp'),
 		svgstore 				= require('gulp-svgstore'),
 		cheerio 				= require('gulp-cheerio'),
 		replace 				= require('gulp-replace'),
-		merge 					= require('gulp-merge-json');
+		merge 					= require('gulp-merge-json'),
+		fileinclude 		= require('gulp-file-include'),
+		useref 					= require('gulp-useref');
 
 const pjson = require('./package.json');
 const dirs = pjson.config.directories;
@@ -152,8 +154,26 @@ gulp.task('removedist', function() {
 	return del('dist'); 
 });
 
+gulp.task('replace-path', function () {
+	return gulp.src('app/css/header.min.css')
+		.pipe(replace(/..\/fonts/gm, 'fonts'))
+		.pipe(replace(/..\/img/gm, 'img'))
+		.pipe(gulp.dest('app/css'));
+});
+
+gulp.task('critical-css', function () {
+	return gulp.src('app/*.html')
+		.pipe(replace(/<!--ST:INK/gm, ''))
+		.pipe(replace(/ED:INK-->/gm, ''))
+		.pipe(useref())
+		.pipe(fileinclude({
+			prefix: '@@'
+		}))
+		.pipe(gulp.dest('dist'));
+});
+
 gulp.task('assets', function () {
-	return gulp.src(['app/*.html', 'app/css/*.css', 'app/js/**/*', 'app/fonts/**/*', 'app/.htaccess'], {base: 'app'})
+	return gulp.src(['app/css/style.min.css', 'app/js/**/*', '!app/js/common.js', 'app/fonts/**/*', 'app/.htaccess'], {base: 'app'})
 		.pipe(gulp.dest('dist'));
 });
 
@@ -169,7 +189,7 @@ gulp.task('imagemin', function() {
 });
 
 gulp.task('build', gulp.series(
-	'removedist', 'scss', 
+	'removedist', 'scss', 'replace-path', 'critical-css',
 	gulp.parallel('imagemin', 'assets')
 ));
 /*======= PRODUCTION. END =======*/
