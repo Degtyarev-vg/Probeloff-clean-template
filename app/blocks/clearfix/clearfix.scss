@@ -1,0 +1,15 @@
+// Для импорта в файл подключения: @import './app/blocks/clearfix/clearfix.scss';
+
+@import '../../scss/vars.scss';     // файл с переменными
+@import '../../scss/png-sprite';    // файл с png-спрайтами
+@import 'bourbon';
+
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}

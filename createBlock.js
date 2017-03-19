@@ -156,7 +156,7 @@ if(blockName) {
         // Если это JS
         else if(extention == 'js') {
           JSfileImport = '//= include ' + blockName + '/' + blockName + '.js';
-          fileContent = '$(document).ready(function() {\n// код\n});';
+          fileContent = '$(function() {\n// код\n});';
 
           // Создаем регулярку с импортом
           let reg = new RegExp(JSfileImport, '');

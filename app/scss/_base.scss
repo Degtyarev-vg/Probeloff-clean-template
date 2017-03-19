@@ -9,30 +9,3 @@ body{
 	font-family: $default-font;
 	overflow-x: hidden;
 }
-
-.icon {
-	display: inline-block;
-	width: 1em;
-	height: 1em;
-	fill: currentColor;
-}
-
-.grid {
-	max-width: 1200px;
-	padding-right: 15px;
-	padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.clearfix:before,
-.clearfix:after,
-.grid:before,
-.grid:after {
-  content: " ";
-  display: table;
-}
-.clearfix:after,
-.grid:after {
-  clear: both;
-}

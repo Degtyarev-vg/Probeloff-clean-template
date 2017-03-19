@@ -59,9 +59,9 @@
 
 ```
 # формат: node createBlock.js [имя файла подключения импорта scss] [имя блока] [доп. расширения через пробел]
-node createBlock.js includes.scss block                                           # создаст только папку блока block и в ней файл block.scss. Файл block.scss будет заимпортирован в файл подключения includes.scss
-node createBlock.js new-block jade js                                    # создаст папку блока new-block и в ней new-block.scss, new-block.jade, new-block.js
-node createBlock.js new-block js [доп. расширения через пробел]     # создаст папку блока new-block и в ней new-block.scss, new-block.jade, new-block.js, а также файлы с другими дополнительно указанными расширениями
+node createBlock.js includes.scss block                                                # создаст только папку блока block и в ней файл block.scss. Файл block.scss будет заимпортирован в файл подключения includes.scss
+node createBlock.js includes.scss new-block jade js                                    # создаст папку блока new-block и в ней new-block.scss, new-block.jade, new-block.js
+node createBlock.js includes.scss new-block jade js [доп. расширения через пробел]     # создаст папку блока new-block и в ней new-block.scss, new-block.jade, new-block.js, а также файлы с другими дополнительно указанными расширениями
 ```
 По умолчанию будет создан .scss файл, в него будет записан стартовый контент.
 
@@ -84,7 +84,7 @@ mixin new-block()
 ```
 Если дополнительно будет создан js файл, то в него по умолчанию запишется:
 ```
-$(document).ready(function() {
+$(function() {
     // код
 });
 ```
