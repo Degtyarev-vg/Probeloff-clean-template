@@ -16,6 +16,7 @@ var gulp 						= require('gulp'),
 		del 						= require('del'),
 		imagemin 				= require('gulp-imagemin'),
 		cache 					= require('gulp-cache'),
+		cached 					= require('gulp-cached'),
 		pngquant 				= require('imagemin-pngquant'),
 		browserSync 		= require('browser-sync').create(),
 		uglify 					= require('gulp-uglify'),
@@ -38,7 +39,7 @@ gulp.task('browser-sync', function() {
 	browserSync.init({
 		server: 'app'
 	});
-	browserSync.watch('app/*.html').on('change', browserSync.reload);
+	//browserSync.watch('app/*.html').on('change', browserSync.reload);
 	browserSync.watch('app/**/*.js').on('change', browserSync.reload);
 });
 
@@ -60,12 +61,13 @@ gulp.task('jade', function() {
     	locals: JSON.parse(fs.readFileSync('./app/data.json', 'utf-8')),
     	pretty: true
     }))
+    .pipe(cached('jade'))
     .pipe(gulp.dest('app/'))
     .pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('scss', function () {
-	return gulp.src(["app/blocks*/**/*.scss", "app/scss/**/*.scss"])
+	return gulp.src(["app/scss/**/*.scss"])
 		.pipe(plumber({
 			errorHandler: notify.onError()
 		}))
@@ -82,6 +84,7 @@ gulp.task('scss', function () {
 		.pipe(cleanCSS())
 		.pipe(rename({suffix: '.min', prefix : ''}))
 		.pipe(gulpIf(isDevelopment, sourcemaps.write()))
+		.pipe(cached('scss'))
 		.pipe(gulp.dest('app/css'))
 		.pipe(browserSync.reload({stream: true}));
 });
