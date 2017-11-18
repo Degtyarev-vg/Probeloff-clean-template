@@ -1,11 +1,11 @@
-@import "bourbon";
-@import "vars";
+@import 'bourbon';
+@import 'vars';
 
-body{
+body {
+	font-family: $default-font;
 	font-size: 10px;
+	line-height: 1.5;
 	min-width: 320px;
 	position: relative;
-	line-height: 1.6;
-	font-family: $default-font;
 	overflow-x: hidden;
 }

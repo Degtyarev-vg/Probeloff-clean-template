@@ -72,7 +72,7 @@ mixin bemto_tag(tag, tagMetadata)
       - attributes.type = "text"
 
   if newTag == 'main'
-    if !attributes.role
+    //-if !attributes.role
       - attributes.role = 'main'
   if newTag == 'html'
     <!DOCTYPE html>

@@ -1,5 +1,5 @@
 mixin form-validation(projectName, formSubject)
-	+b('form').form-validation&attributes(attributes)
+	+b('form')(autocomplete='off').form-validation&attributes(attributes)
 		input(type='hidden' name='project_name' value=projectName || 'Название проекта')
 		input(type='hidden' name='form_subject' value=formSubject || 'Название формы')
 		block

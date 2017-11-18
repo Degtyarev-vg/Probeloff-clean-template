@@ -33,7 +33,7 @@ if(blockName) {
 
       // Читаем файл подключения
       let connectManager = fs.readFileSync(dirs.source + '/'+ writeBlock +'/' + mainFile, 'utf8');
-      let connectManagerJADE = fs.readFileSync(dirs.source + '/'+ writeBlock +'/' + 'includes.jade', 'utf8');
+      let connectManagerpug = fs.readFileSync(dirs.source + '/'+ writeBlock +'/' + 'includes.pug', 'utf8');
       let connectManagerJS = fs.readFileSync(dirs.source + '/'+ writeBlock +'/' + 'includes.js', 'utf8');
 
       // Делаем из строк массив, фильтруем массив, оставляя только строки с незакомментированными импортами
@@ -43,7 +43,7 @@ if(blockName) {
       });
 
       // Делаем из строк массив, фильтруем массив, оставляя только строки с незакомментированными импортами
-      let fileSystemJADE = connectManagerJADE.split('\n').filter(function(item) {
+      let fileSystemPUG = connectManagerpug.split('\n').filter(function(item) {
         if(/^(\s*)include/.test(item)) return true;
         else return false;
       });
@@ -60,7 +60,7 @@ if(blockName) {
         let filePath = dirPath + blockName + '.' + extention; // полный путь к создаваемому файлу
         let fileContent = '';                                 // будущий контент файла
         let SASSfileImport = '';                              // конструкция импорта будущего SCSS
-        let JADEfileImport = '';                              // конструкция импорта будущего JADE
+        let PUGfileImport = '';                              // конструкция импорта будущего pug
         let JSfileImport = '';                                // конструкция импорта будущего JS
         let fileCreateMsg = '';                               // будущее сообщение в консоли при создании файла
 
@@ -108,21 +108,21 @@ if(blockName) {
           }
         }
 
-        // Если это jade
-        else if(extention == 'jade') {
-          JADEfileImport = 'include ' + blockName + '/' + blockName;
+        // Если это pug
+        else if(extention == 'pug') {
+          PUGfileImport = 'include ' + blockName + '/' + blockName;
           fileContent = 'mixin ' + blockName + '()\n\t+b.' + blockName + '&attributes(attributes)\n\t\tblock\n';
-          fileCreateMsg = 'Для вставки разметки: @@include(\''+ writeBlock +'/' + blockName + '/' + blockName + '.jade\')  Подробнее: https://www.npmjs.com/package/gulp-file-include';
+          fileCreateMsg = 'Для вставки разметки: @@include(\''+ writeBlock +'/' + blockName + '/' + blockName + '.pug\')  Подробнее: https://www.npmjs.com/package/gulp-file-include';
 
           // Создаем регулярку с импортом
-          let reg = new RegExp(JADEfileImport, '');
+          let reg = new RegExp(PUGfileImport, '');
 
           // Создадим флаг отсутствия блока среди импортов
           let impotrtExist = false;
 
           // Обойдём массив и проверим наличие импорта
-          for (var i = 0, j=fileSystemJADE.length; i < j; i++) {
-            if(reg.test(fileSystemJADE[i])) {
+          for (var i = 0, j=fileSystemPUG.length; i < j; i++) {
+            if(reg.test(fileSystemPUG[i])) {
               impotrtExist = true;
               break;
             }
@@ -131,24 +131,24 @@ if(blockName) {
           // Если флаг наличия импорта по-прежнему опущен, допишем импорт
           if(!impotrtExist) {
             // Открываем файл
-            fs.open(dirs.source + '/'+ writeBlock +'/' + 'includes.jade', 'a', function(err, fileHandle) {
+            fs.open(dirs.source + '/'+ writeBlock +'/' + 'includes.pug', 'a', function(err, fileHandle) {
               // Если ошибок открытия нет...
               if (!err) {
                 // Запишем в конец файла
-                fs.write(fileHandle, JADEfileImport + '\n', null, 'utf8', function(err, written) {
+                fs.write(fileHandle, PUGfileImport + '\n', null, 'utf8', function(err, written) {
                   if (!err) {
-                    console.log('В файл подключений ('+ dirs.source + '/'+ writeBlock +'/' + 'includes.jade' + ') записано: ' + JADEfileImport);
+                    console.log('В файл подключений ('+ dirs.source + '/'+ writeBlock +'/' + 'includes.pug' + ') записано: ' + PUGfileImport);
                   } else {
-                    console.log('ОШИБКА записи в '+ dirs.source + '/'+ writeBlock +'/' + 'includes.jade' + ': ' + err);
+                    console.log('ОШИБКА записи в '+ dirs.source + '/'+ writeBlock +'/' + 'includes.pug' + ': ' + err);
                   }
                 });
               } else {
-                console.log('ОШИБКА открытия '+ dirs.source + '/'+ writeBlock +'/' + 'includes.jade' + ': ' + err);
+                console.log('ОШИБКА открытия '+ dirs.source + '/'+ writeBlock +'/' + 'includes.pug' + ': ' + err);
               }
             });
           }
           else {
-            console.log('Импорт НЕ прописан в '+ dirs.source + '/'+ writeBlock +'/' + 'includes.jade' + ' (он там уже есть)');
+            console.log('Импорт НЕ прописан в '+ dirs.source + '/'+ writeBlock +'/' + 'includes.pug' + ' (он там уже есть)');
           }
 
         }
@@ -156,7 +156,7 @@ if(blockName) {
         // Если это JS
         else if(extention == 'js') {
           JSfileImport = '//= include ' + blockName + '/' + blockName + '.js';
-          fileContent = '$(function() {\n// код\n});';
+          fileContent = '\'use strict\';\n\n$(function() {\n\n\t\n\n});';
 
           // Создаем регулярку с импортом
           let reg = new RegExp(JSfileImport, '');
