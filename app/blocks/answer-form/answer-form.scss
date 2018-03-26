@@ -1,74 +1,62 @@
-// Для импорта в файл подключения: @import './app/blocks/answer-form/answer-form.scss';
+// Для импорта в файл подключения: @import './app/blocks/answer-form/answer-form';
 
-@import '../../scss/vars.scss';     // файл с переменными
+@import '../../scss/vars';     // файл с переменными
 @import '../../scss/png-sprite';    // файл с png-спрайтами
-@import 'bourbon';
 
 
 .answer-form {
-	background-color: #fff;
-	font-family: $default-font;
-	max-width: 450px;
-	padding: 30px;
-	position: relative;
-	text-align: center;
-	margin: 0 auto;
-	color: #000;
+  background-color: #fff;
+  font-family: $default-font;
+  max-width: 450px;
+  padding: 30px;
+  position: relative;
+  text-align: center;
+  margin: 0 auto;
+  color: #000;
+  @media (max-width: 479px) {
+    padding: 30px 15px;
+  }
 
-	&__header {
-		font-size: 30px;
-		font-weight: normal;
-		text-transform: uppercase;
-		line-height: 1.5;
-		padding-bottom: 10px;
-	}
+  &__header {
+    font-size: 30px;
+    font-weight: normal;
+    text-transform: uppercase;
+    line-height: 1.5;
+    padding-bottom: 10px;
+    @media (max-width: 479px) {
+      font-size: 20px;
+    }
+  }
 
-	&__subheader {
-		font-size: 18px;
-		line-height: 1.5;
-	}
+  &__subheader {
+    font-size: 18px;
+    line-height: 1.5;
+    @media (max-width: 479px) {
+      font-size: 16px;
+    }
+  }
 
-	&__ok {
-		background-color: #FFDB4D;
-		border-radius: 50%;
-		display: inline-block;
-		font-size: 50px;
-		line-height: 2;
-		margin: 30px auto 0 auto;
-		width: 100px;
-		height: 100px;
-		text-decoration: none;
-		text-transform: uppercase;
-		transition: all ease .35s;
-		color: #000;
-		&:hover {
-			background-color: darken(#FFDB4D, 15%);
-		}
-	}
-
-}
-
-
-
-@media (max-width: 479px) {
-
-	.answer-form {
-		padding: 30px 15px;
-
-		&__header {
-			font-size: 20px;
-		}
-
-		&__subheader {
-			font-size: 16px;
-		}
-
-		&__ok {
-			font-size: 40px;
-			width: 80px;
-			height: 80px;
-		}
-
-	}
+  &__ok {
+    background-color: #FFDB4D;
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 50px;
+    line-height: 2;
+    margin: 30px auto 0 auto;
+    width: 100px;
+    height: 100px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all ease .35s;
+    color: #000;
+    @media (max-width: 479px) {
+      font-size: 40px;
+      width: 80px;
+      height: 80px;
+    }
+    &:hover {
+      background-color: darken(#FFDB4D, 15%);
+    }
+  }
 
 }

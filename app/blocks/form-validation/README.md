@@ -1,7 +1,7 @@
 # Блок form-validation
 Используется для любых форм, в которых нужно валидировать какие-либо поля.  
 Валидация реализована на основе плагина [jQuery Validation Plugin](https://jqueryvalidation.org/).
-### Содержание jade файла
+### Содержание pug файла
 ```
 mixin form-validation(projectName, formSubject)
   +b('form').form-validation&attributes(attributes)
@@ -159,7 +159,7 @@ submitHandler: function(form) {
 ```
 Ajax обработка формы.
 ### Использование
-1. В нужном месте jade файла вызвать данный миксин: `+form-validation('projectName','formSubject')`. В качестве первого аргумента в виде строки указать *название проекта* в качестве второго аргумента в виде строки указать *название формы*.
+1. В нужном месте pug файла вызвать данный миксин: `+form-validation('projectName','formSubject')`. В качестве первого аргумента в виде строки указать *название проекта* в качестве второго аргумента в виде строки указать *название формы*.
 Пример:
 ```
 +form-validation('Тестовый проект', 'Тестовая форма')

@@ -66,8 +66,8 @@ if(blockName) {
 
         // Если это SCSS
         if(extention == 'scss') {
-          SASSfileImport = '@import \'' + dirs.source + '/'+ writeBlock +'/' + blockName + '/' + blockName + '.scss\';';
-          fileContent = '// Для импорта в файл подключения: ' + SASSfileImport + '\n\n@import \'../../scss/vars.scss\';     // файл с переменными\n@import \'../../scss/png-sprite\';    // файл с png-спрайтами\n@import \'bourbon\';\n\n\n.' + blockName + ' {\n  \n}\n';
+          SASSfileImport = '@import \'' + dirs.source + '/'+ writeBlock +'/' + blockName + '/' + blockName + '\';';
+          fileContent = '// Для импорта в файл подключения: ' + SASSfileImport + '\n\n@import \'../../scss/vars\';     // файл с переменными\n@import \'../../scss/png-sprite\';    // файл с png-спрайтами\n\n\n.' + blockName + ' {\n  \n}\n';
           fileCreateMsg = 'Для импорта стилей: ' + SASSfileImport;
 
           // Создаем регулярку с импортом
@@ -111,7 +111,7 @@ if(blockName) {
         // Если это pug
         else if(extention == 'pug') {
           PUGfileImport = 'include ' + blockName + '/' + blockName;
-          fileContent = 'mixin ' + blockName + '()\n\t+b.' + blockName + '&attributes(attributes)\n\t\tblock\n';
+          fileContent = 'mixin ' + blockName + '()\n  +b.' + blockName + '&attributes(attributes)\n    block\n';
           fileCreateMsg = 'Для вставки разметки: @@include(\''+ writeBlock +'/' + blockName + '/' + blockName + '.pug\')  Подробнее: https://www.npmjs.com/package/gulp-file-include';
 
           // Создаем регулярку с импортом
@@ -156,7 +156,7 @@ if(blockName) {
         // Если это JS
         else if(extention == 'js') {
           JSfileImport = '//= include ' + blockName + '/' + blockName + '.js';
-          fileContent = '\'use strict\';\n\n$(function() {\n\n\t\n\n});';
+          fileContent = '\'use strict\';\n\n$(function() {\n\n  \n\n});';
 
           // Создаем регулярку с импортом
           let reg = new RegExp(JSfileImport, '');
@@ -199,7 +199,7 @@ if(blockName) {
 
         // Если это json
         else if(extention == 'json') {
-          fileContent = '{\n\t\n}';
+          fileContent = '{\n  \n}';
         }
 
         // Создаем файл, если он еще не существует

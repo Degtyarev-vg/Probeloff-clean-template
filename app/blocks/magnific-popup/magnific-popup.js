@@ -1,22 +1,24 @@
-$(document).ready(function() {
+'use strict';
 
-	// Magnific Popup
-	$('.popup-with-move-anim').magnificPopup({
-	//$('.popup-with-zoom-anim').magnificPopup({
-		type: 'inline',
+$(function() {
 
-		fixedContentPos: false,
-		fixedBgPos: true,
+  // Magnific Popup
+  // $('.popup-with-move-anim').magnificPopup({
+  $('.popup-with-zoom-anim').magnificPopup({
+    type: 'inline',
 
-		overflowY: 'auto',
+    fixedContentPos: false,
+    fixedBgPos: true,
 
-		closeBtnInside: true,
-		preloader: false,
-		
-		midClick: true,
-		removalDelay: 300,
-		mainClass: 'my-mfp-slide-bottom'
-		//mainClass: 'my-mfp-zoom-in'
-	});
+    overflowY: 'auto',
+
+    closeBtnInside: true,
+    preloader: false,
+
+    midClick: true,
+    removalDelay: 300,
+    // mainClass: 'my-mfp-slide-bottom'
+    mainClass: 'my-mfp-zoom-in'
+  });
 
 });

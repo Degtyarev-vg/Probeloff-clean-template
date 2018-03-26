@@ -1,0 +1,30 @@
+// Для импорта в файл подключения: @import './app/blocks.project/page/page';
+
+@import '../../scss/vars';     // файл с переменными
+@import '../../scss/png-sprite';    // файл с png-спрайтами
+
+
+.page {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  flex-direction: column;
+  font-family: $default-font;
+  font-size: 62.5%;
+  line-height: 1.5;
+  min-width: 320px;
+  position: relative;
+  overflow-x: hidden;
+  height: 100vh;
+
+  &__header, &__footer {
+    flex-shrink: 0;
+  }
+
+  &__content {
+    flex: 1 0 auto;
+  }
+
+}

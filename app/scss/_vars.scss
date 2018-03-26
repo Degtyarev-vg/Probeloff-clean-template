@@ -1,1 +1,9 @@
-$default-font: "RobotoRegular", sans-serif;
+$RobotoRegular: "RobotoRegular", "Helvetica", "Tahoma", sans-serif;
+$RobotoBold: "RobotoBold", "Helvetica", "Tahoma", sans-serif;
+
+$default-font: $RobotoRegular;
+
+$transition: all ease .3s;
+
+$mainColor: #fff;
+$accentColor: #000;

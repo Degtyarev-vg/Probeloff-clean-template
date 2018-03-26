@@ -3,7 +3,6 @@
 var gulp 						= require('gulp'),
 		fs 							= require('fs'),
 		sass 						= require('gulp-sass'),
-		bourbon 				= require('node-bourbon'),
 		notify 					= require("gulp-notify"),
 		plumber					= require("gulp-plumber"),
 		autoprefixer 		= require('gulp-autoprefixer'),
@@ -19,6 +18,7 @@ var gulp 						= require('gulp'),
 		uglify 					= require('gulp-uglify'),
 		include       	= require('gulp-include'),
 		pug 						= require('gulp-pug'),
+    prettify        = require("gulp-prettify"),
 		spritesmith 		= require('gulp.spritesmith'),
 		svgmin 					= require('gulp-svgmin'),
 		svgstore 				= require('gulp-svgstore'),
@@ -60,20 +60,21 @@ gulp.task('pug', function() {
 			locals: JSON.parse(fs.readFileSync('./app/data.json', 'utf-8')),
 			pretty: true
 		}))
+    .pipe(prettify({
+      indent_size: 2
+    }))
 		.pipe(cached('pug'))
 		.pipe(gulp.dest('app/'))
 		.pipe(browserSync.reload({stream: true}));
 });
 
 gulp.task('scss', function () {
-	return gulp.src(["app/scss/**/*.scss"])
+	return gulp.src(['app/scss/**/*.scss'])
 		.pipe(plumber({
 			errorHandler: notify.onError()
 		}))
 		.pipe(gulpIf(isDevelopment, sourcemaps.init()))
-		.pipe(sass({
-			includePaths: bourbon.includePaths
-		}))
+		.pipe(sass())
 		.pipe(autoprefixer(['last 15 versions', '> 1%']))
 		.pipe(gcmq())
 		.pipe(csso())
@@ -84,12 +85,12 @@ gulp.task('scss', function () {
 		.pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task("libs:js", function() {
+gulp.task('libs:js', function() {
 	return gulp.src(['app/libs/include-libs.js'])
 		.pipe( include() )
 		.pipe(rename('libs.min.js'))
 		.pipe(uglify())
-		.pipe( gulp.dest("app/js") )
+		.pipe( gulp.dest('app/js') )
 });
 
 gulp.task('blocks:js', function() {
@@ -156,8 +157,8 @@ gulp.task('clearcache', function (done) {
 gulp.task('default', gulp.parallel('watch', 'browser-sync'));
 
 /*======= PRODUCTION =======*/
-gulp.task('removedist', function() { 
-	return del('dist'); 
+gulp.task('removedist', function() {
+	return del('dist');
 });
 
 gulp.task('replace-path', function () {
@@ -191,7 +192,7 @@ gulp.task('imagemin', function() {
 			svgoPlugins: [{removeViewBox: false}],
 			use: [pngquant()]
 		})))
-		.pipe(gulp.dest('dist/img')); 
+		.pipe(gulp.dest('dist/img'));
 });
 
 gulp.task('build', gulp.series(

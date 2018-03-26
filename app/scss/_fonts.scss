@@ -1,4 +1,15 @@
-@import 'bourbon';
+@font-face {
+  font-family: "RobotoRegular";
+  src: url("../fonts/RobotoRegular/RobotoRegular.woff2") format("woff2"),
+       url("../fonts/RobotoRegular/RobotoRegular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 
-@include font-face("RobotoRegular", "../fonts/RobotoRegular/RobotoRegular", $file-formats: eot woff ttf);
-@include font-face("RobotoBold", "../fonts/RobotoBold/RobotoBold", $file-formats: eot woff ttf);
+@font-face {
+  font-family: "RobotoBold";
+  src: url("../fonts/RobotoBold/RobotoBold.woff2") format("woff2"),
+       url("../fonts/RobotoBold/RobotoBold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}

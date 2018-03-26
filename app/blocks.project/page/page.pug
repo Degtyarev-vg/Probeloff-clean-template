@@ -1,0 +1,7 @@
+mixin page()
+  +b('body').page&attributes(attributes)
+    block
+
+    link(href='css/style.min.css' rel='stylesheet')
+    script(src='js/libs.min.js')
+    script(src='js/blocks.min.js')

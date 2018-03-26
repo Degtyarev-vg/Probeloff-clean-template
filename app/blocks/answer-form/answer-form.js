@@ -1,8 +1,10 @@
-$(document).ready(function() {
+'use strict';
 
-	$('.answer-form__ok').click(function(){
-		$.magnificPopup.close();
-		return false;
-	});
+$(function() {
+
+  $('.answer-form__ok').click(function(){
+    $.magnificPopup.close();
+    return false;
+  });
 
 });

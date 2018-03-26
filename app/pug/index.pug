@@ -1,18 +1,18 @@
 include ../blocks.project/includes
-include templates/page/page
 
 doctype html
 html(lang='ru')
-	include templates/head/head
-		block head
-			- var pageTitle = 'There is title';
+  include templates/head/head
+    block head
+      - var pageTitle = 'There is title';
 
-	+page
-		//Тут пишем контент
-		.grid
-			+form-validation('Моё название проекта', 'Моё название формы')
-				+e.group
-					+b('input')(type='text' name='Имя' placeholder='Ваше имя').validation._minlength
-				+e('button')(type='button').button Send
-		.grid
-			+b.test Это тестовый текст
+  +page
+
+    +b('header').header.__header
+      //- Content for header
+
+    +b.content.__content
+      //- Other content
+
+    +b('footer').footer.__footer
+      //- Content for footer
