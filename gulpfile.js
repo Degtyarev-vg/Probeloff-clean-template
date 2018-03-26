@@ -161,16 +161,20 @@ gulp.task('removedist', function() {
 	return del('dist');
 });
 
+gulp.task('remove-unnecessary', function() {
+  return del('dist/css/header.min.css');
+});
+
 gulp.task('replace-path', function () {
-	return gulp.src('app/css/header.min.css')
+	return gulp.src('dist/css/header.min.css')
 		.pipe(replace(/..\/fonts/gm, 'fonts'))
 		.pipe(replace(/..\/img/gm, 'img'))
-		.pipe(gulp.dest('app/css'));
+		.pipe(gulp.dest('dist/css'));
 });
 
 gulp.task('critical-css', function () {
-	return gulp.src('app/*.html')
-		.pipe(replace(/<!--ST:INK/gm, ''))
+	return gulp.src('dist/*.html')
+		.pipe(replace(/< !--ST:INK/gm, ''))
 		.pipe(replace(/ED:INK-->/gm, ''))
 		.pipe(useref())
 		.pipe(fileinclude({
@@ -180,7 +184,7 @@ gulp.task('critical-css', function () {
 });
 
 gulp.task('assets', function () {
-	return gulp.src(['app/css/style.min.css', 'app/js/**/*', '!app/js/common.js', 'app/fonts/**/*', 'app/.htaccess'], {base: 'app'})
+	return gulp.src(['app/*.html', 'app/css/*.css', 'app/js/**/*', 'app/fonts/**/*', 'app/.htaccess', 'app/robots.txt'], {base: 'app'})
 		.pipe(gulp.dest('dist'));
 });
 
@@ -196,7 +200,7 @@ gulp.task('imagemin', function() {
 });
 
 gulp.task('build', gulp.series(
-	'removedist', 'scss', 'replace-path', 'critical-css',
-	gulp.parallel('imagemin', 'assets')
+	'removedist', 'scss', 'assets', 'replace-path', 'critical-css', 'remove-unnecessary',
+	gulp.parallel('imagemin')
 ));
 /*======= PRODUCTION. END =======*/
