@@ -76,7 +76,9 @@ gulp.task('scss', function () {
       errorHandler: notify.onError()
     }))
     .pipe(gulpIf(isDevelopment, sourcemaps.init()))
-    .pipe(sass())
+    .pipe(sass({
+      precision: 10
+    }))
     .pipe(autoprefixer(['last 15 versions', '> 1%']))
     .pipe(gcmq())
     .pipe(csso())
